@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' / -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="resources/bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<!--link rel="stylesheet" href = "css/mycss.css"-->
+	<script src="resources/bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="resources/scripts/script.js"></script>
+	<link rel="stylesheet" type="text/css" href="resources/css/style.css">
+	<link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="resources/css/animate.css"> 	
+	<title>Vocabulary</title>
+</head>
+<body class="container-fluid bg-grey">
+	<div class="">
+	<p class="space-30"></p>
+		<div class="row">
+			<div id="flashCards" class="text-center col-xs-12 col-sm-12 animated rollInRight" style="margin-bottom:10px;">
+				<div id ="word" class="card flashCard animated fg-white bg-primary flipInX">
+					<h2 class="text-left" style="position:absolute;left:20px" id="cid"></h2>
+					<h1 id="name"></h1>
+					<h2 id="type"></h2>
+					<h3 id="other"></h3>
+					<h4 class="" style="position:absolute;right:10px;bottom:5px" id="pageNo"></h4>
+				</div>
+				<div class="card text-left flashCard fg-white animated bg-main hideCard flipInX" id = "defination">
+					<h2 id="def"></h2>
+					<h4 id="usage"></h4>
+					<h3 class="fg-dark" id="relWords"></h3>
+					<h4 id="info"></h4>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12 text-center">
+				<button class="btn btn-lg btn-success" id="prevCard">Previous Card</button>
+				<button class="btn btn-lg btn-danger" id="flipBtn">Flip</button>
+				<button class="btn btn-lg btn-success" id="nxtCard">Next Card</button>
+			</div>
+		</div>
+		<p class="space-10"></p>	
+		<div class="row">
+			<div class="col-sm-12 text-center"><a class="btn btn-primary" href="/">Restart</a></div>
+		</div>
+	</div>
+</body>
+</html>
