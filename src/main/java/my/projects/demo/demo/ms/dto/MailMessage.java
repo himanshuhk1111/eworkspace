@@ -3,16 +3,26 @@ package my.projects.demo.demo.ms.dto;
 import java.io.File;
 import java.util.List;
 
+import org.springframework.http.codec.multipart.FilePart;
+
 public class MailMessage {
 	
 	private String from;
+	private String fileId;
 	private List<String> to;
 	private List<String> cc;
 	private List<String> bcc;
 	private String message;
-	private List<File> attachments;
+	private List<FilePart> attachments;
 	private String subject;
 	
+	
+	public String getFileId() {
+		return fileId;
+	}
+	public void setFileId(String fileId) {
+		this.fileId = fileId;
+	}
 	public String getSubject() {
 		return subject;
 	}
@@ -49,10 +59,10 @@ public class MailMessage {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	public List<File> getAttachments() {
+	public List<FilePart> getAttachments() {
 		return attachments;
 	}
-	public void setAttachments(List<File> attachments) {
+	public void setAttachments(List<FilePart> attachments) {
 		this.attachments = attachments;
 	}
 
