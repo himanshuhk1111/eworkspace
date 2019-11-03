@@ -52,7 +52,7 @@ public class MailService {
 	      // Sender's email ID needs to be mentioned
 	      String from = "himanshuhk1111@gmail.com";
 	      final String username = "himanshuhk1111";//change accordingly
-	      final String password = "bogus@2018";//change accordingly
+	      final String password = msg.getPassword();//change accordingly
 
 	      Properties props = getProperties();
 	      // Get the Session object.
