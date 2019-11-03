@@ -100,7 +100,7 @@ public class MailService {
 		   message.setText(msg.getMessage());
 
 		   //set attachment
-		   /*message.setContent(transformMailAttachments(msg.getAttachments()));
+		   message.setContent(transformMailAttachments(msg.getAttachments()));
 		   
 		   Multipart parts = (Multipart)message.getContent();
 
@@ -108,8 +108,8 @@ public class MailService {
 		   text.setText(msg.getMessage(),null,"html");
 		   parts.addBodyPart(text);
 			
-*/		   // Send message
-		   Transport.send(message);
+		   // Send message
+		   //Transport.send(message);
 
 		   System.out.println("Sent message successfully....");
 
