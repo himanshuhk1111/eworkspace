@@ -2,7 +2,6 @@ package my.projects.demo.demo.ms.service;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Base64;
 import java.util.List;
 import java.util.Properties;
 
@@ -19,18 +18,21 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.codec.multipart.FilePart;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
-import org.springframework.web.multipart.MultipartFile;
 
 import my.projects.demo.demo.ms.dto.MailMessage;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Component
 public class MailService {
 
+	
+	@Value("${path.eworkspace}")
+	private String eworkspace;
+	
 	
 	private static Properties getProperties(){
 	      // Assuming you are sending email through relay.jangosmtp.net
@@ -124,13 +126,13 @@ public class MailService {
 		if(!ObjectUtils.isEmpty(files)){
 			for(FilePart file:files){
 				
-				file.transferTo(new File("D:\\heroku-apps\\upload\\"+file.filename()))
+				file.transferTo(new File(eworkspace+file.filename()))
 				.then(Mono.just("")).subscribe(t->{
 					MimeBodyPart attachment;
 					attachment = new MimeBodyPart();
 					try {
 						attachment.setFileName(file.filename());
-						attachment.setDataHandler(new DataHandler(new FileDataSource(new File("D:\\heroku-apps\\upload\\"+file.filename()))));
+						attachment.setDataHandler(new DataHandler(new FileDataSource(new File(eworkspace+file.filename()))));
 						multipart.addBodyPart(attachment);
 						System.out.println("Attachment :: "+file.filename());
 					} catch (MessagingException e) {
