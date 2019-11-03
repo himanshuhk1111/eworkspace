@@ -2,10 +2,17 @@ package my.projects.demo.demo.ms;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.Properties;
+
+import javax.mail.AuthenticationFailedException;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.codec.multipart.Part;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -68,6 +75,50 @@ public class MailController {
 			});
 			return null;
 		});
+	}
+	
+	
+	@PostMapping("/mail/check")
+	public Mono<Response<Void>> checkMailConnection(@ModelAttribute MailMessage msg){
+		int port = 587;
+	    String host = "smtp.gmail.com";
+	    String user = "himanshuhk1111@gmail.com";
+	    String pwd = msg.getPassword();
+
+	    try {
+	        Properties props = new Properties();
+	        // required for gmail 
+	        props.put("mail.smtp.starttls.enable","true");
+	        props.put("mail.smtp.auth", "true");
+	        // or use getDefaultInstance instance if desired...
+	        Session session = Session.getInstance(props, null);
+	        Transport transport = session.getTransport("smtp");
+	        transport.connect(host, port, user, pwd);
+	        transport.close();
+	        System.out.println("success");
+	     } 
+	     catch(AuthenticationFailedException e) {
+	           System.out.println("AuthenticationFailedException - for authentication failures");
+	           e.printStackTrace();
+
+		   		Response<Void> res = new Response<Void>();
+		   		res.setMessage(e.getLocalizedMessage());
+		   		res.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+		   		return Mono.just(res);
+	     }
+	     catch(MessagingException e) {
+	           System.out.println("for other failures");
+	           e.printStackTrace();
+
+		   		Response<Void> res = new Response<Void>();
+		   		res.setMessage("for other failures");
+		   		res.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+		   		return Mono.just(res);
+	     }
+		Response<Void> res = new Response<Void>();
+		res.setMessage("SUCCESS");
+		res.setStatus(HttpStatus.OK.value());
+		return Mono.just(res);
 	}
 	
 }
