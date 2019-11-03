@@ -1,1 +1,1 @@
-web:    java -jar target/demo-0.0.1-SNAPSHOT.war --server.port=$PORT --path.eworkspace=/app/eworkspace
+web:    java $JAVA_OPTS -jar target/demo-0.0.1-SNAPSHOT.war --server.port=$PORT --path.eworkspace=/app/eworkspace
