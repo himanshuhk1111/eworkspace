@@ -1,8 +1,12 @@
 package my.projects.demo.demo.ms;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
 import javax.mail.AuthenticationFailedException;
 import javax.mail.MessagingException;
@@ -10,6 +14,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.codec.multipart.Part;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +31,11 @@ import reactor.core.publisher.Mono;
 
 @RestController
 public class MailController {
+	
+	
+
+	@Value("${path.eworkspace}")
+	private String eworkspace;
 	
 	@Autowired
 	MailService service;
@@ -116,6 +126,19 @@ public class MailController {
 		   		return Mono.just(res);
 	     }
 		Response<Void> res = new Response<Void>();
+		res.setMessage("SUCCESS");
+		res.setStatus(HttpStatus.OK.value());
+		return Mono.just(res);
+	}
+	
+	@GetMapping("/files")
+	public Mono<Response<List<String>>> getFiles(){
+		
+		File file = new File(eworkspace);
+		List<String>files = Arrays.asList(file.listFiles()).stream().map(t->t.getName()).collect(Collectors.toList());
+		
+		Response<List<String>> res = new Response<List<String>>();
+		res.setData(files);
 		res.setMessage("SUCCESS");
 		res.setStatus(HttpStatus.OK.value());
 		return Mono.just(res);
