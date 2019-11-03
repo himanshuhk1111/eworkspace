@@ -42,7 +42,7 @@ public class MailService {
 	      props.put("mail.smtp.starttls.enable", "true");
 	      props.put("mail.imaps.partialfetch", false);
 	      props.put("mail.smtp.host", host);
-	      props.put("mail.smtp.port", "583");
+	      props.put("mail.smtp.port", "587");
 	      return props;
 	}
 	
@@ -51,7 +51,7 @@ public class MailService {
 
 	      // Sender's email ID needs to be mentioned
 	      String from = "himanshuhk1111@gmail.com";
-	      final String username = "himanshuhk1111";//change accordingly
+	      final String username = "himanshuhk1111@gmail.com";//change accordingly
 	      final String password = msg.getPassword();//change accordingly
 
 	      Properties props = getProperties();
