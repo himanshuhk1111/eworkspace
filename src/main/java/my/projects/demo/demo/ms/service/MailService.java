@@ -126,7 +126,7 @@ public class MailService {
 		if(!ObjectUtils.isEmpty(files)){
 			for(FilePart file:files){
 				
-				file.transferTo(new File(eworkspace+file.filename()))
+				file.transferTo(new File("dsd"+eworkspace+file.filename()))
 				.then(Mono.just("")).subscribe(t->{
 					MimeBodyPart attachment;
 					attachment = new MimeBodyPart();
